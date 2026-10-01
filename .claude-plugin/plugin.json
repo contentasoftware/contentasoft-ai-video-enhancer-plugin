@@ -1,0 +1,23 @@
+{
+  "name": "contentasoft-ai-video-enhancer",
+  "displayName": "AI Video Enhancer Studio",
+  "version": "1.0.0",
+  "description": "AI Video Enhancer Studio on your Windows PC from Claude: upscaling, stabilizing, denoising and frame-rate conversion of videos on an NVIDIA RTX GPU. Runs locally on your files.",
+  "author": {
+    "name": "ContentaSoft AB",
+    "url": "https://www.contenta-software.com/"
+  },
+  "homepage": "https://www.contenta-software.com/aivideoenhancer/",
+  "repository": "https://github.com/ContentaSoft/contentasoft-ai-video-enhancer-plugin",
+  "license": "MIT",
+  "keywords": [
+    "windows",
+    "batch",
+    "mcp",
+    "upscaling",
+    "stabilizing",
+    "denoising",
+    "frame-rate",
+    "conversion"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ai-video-enhancer": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@contentasoft/ai-video-enhancer-mcp@1.0.0"
+      ]
+    }
+  }
+}
