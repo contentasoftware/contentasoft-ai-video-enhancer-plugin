@@ -7,9 +7,10 @@ your computer; nothing is uploaded to Anthropic or to ContentaSoft to do the wor
 
 - Windows 10 or 11 with **AI Video Enhancer Studio** installed. It has a free trial: https://www.contenta-software.com/aivideoenhancer/download.php
   (if it is not installed yet, the plugin's `get_started` tool gives Claude the download link and the steps).
-- Node.js, which runs the small launcher package `@contentasoft/ai-video-enhancer-mcp` (MIT, source:
-  https://github.com/contentasoftware/mcp-launcher). The launcher starts the app's own MCP server
-  (`aivideoenhancer serve`) and passes its messages through; it sends nothing over the network itself.
+- Node.js 18 or later, which runs the small launcher in `server/index.js` (MIT, no dependencies, the same code
+  as the npm package `@contentasoft/ai-video-enhancer-mcp`; source: https://github.com/contentasoftware/mcp-launcher). The launcher
+  starts the app's own MCP server (`aivideoenhancer serve`) and passes its messages through; it sends nothing over the
+  network itself.
 - Claude Code or Cowork on that computer. Chat on claude.ai cannot start local programs, so it does not load
   this plugin's tools.
 
@@ -21,8 +22,10 @@ your computer; nothing is uploaded to Anthropic or to ContentaSoft to do the wor
 
 ## What runs and what is sent
 
-- The plugin starts `cmd /c npx -y @contentasoft/ai-video-enhancer-mcp@1.0.0`, which runs `aivideoenhancer.exe` from the app's install
-  folder (`%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio` or your `PATH`).
+- The plugin runs `node server/index.js` from the plugin folder; nothing is downloaded. The launcher looks for
+  `aivideoenhancer.exe` in the app's install folder (`%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio`), on your `PATH`
+  or in `Program Files`, and runs `aivideoenhancer serve`. If the app is missing it serves one tool, `get_started`.
+- The skill may only run the app's own command-line tool (`allowed-tools: Bash(aivideoenhancer:*)`).
 - The app processes local files only. It sends anonymous usage telemetry (which tools ran, which MCP client
   connected, trial state) to ContentaSoft; turn it off in the app's settings. Privacy policy: https://www.contenta-software.com/aivideoenhancer/privacy.php
 - During the trial some outputs carry a watermark or other limits; the tool results say so and link to the
