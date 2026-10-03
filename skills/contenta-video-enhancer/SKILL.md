@@ -8,7 +8,7 @@ allowed-tools: Bash(aivideoenhancer:*)
 
 Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.16+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`).
 
-Results are human-readable text on stdout; log lines go to stderr (drop them with `2>/dev/null` or `2>$null`). Only `remix suggest` has `--json`. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
+Results are human-readable text on stdout; log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`). Only `remix suggest` has `--json`. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
 
 ## First steps
 
@@ -67,16 +67,16 @@ aivideoenhancer remix render <file> --clips "1-4,8-11" -o <reel.mp4> [--aspect o
 
 ## Examples (verified on 2026.7.16)
 
-```powershell
-aivideoenhancer enhance .\clip.mp4 -o .\enhanced --upscale x2 --denoise light --codec h265 --crf 18
-aivideoenhancer enhance .\clip.mp4 -o .\smooth --interpolate 60 --compare
-aivideoenhancer enhance .\tapes -o .\restored --preset old_video_restoration --skip-existing
-aivideoenhancer enhance .\tapes\tape1.dv -o .\cleanup --preset enhance_cleanup --deinterlace off
-aivideoenhancer enhance .\clip.mp4 -o .\clips --upscale x2 --denoise light --clip 0:42
-aivideoenhancer extract-frames video.mp4 -o .\frames --preset thumbnails
-aivideoenhancer extract-frames video.mp4 -o .\frames_up --timestamps 2,5,10 --upscale x2
+```bash
+aivideoenhancer enhance ./clip.mp4 -o ./enhanced --upscale x2 --denoise light --codec h265 --crf 18
+aivideoenhancer enhance ./clip.mp4 -o ./smooth --interpolate 60 --compare
+aivideoenhancer enhance ./tapes -o ./restored --preset old_video_restoration --skip-existing
+aivideoenhancer enhance ./tapes/tape1.dv -o ./cleanup --preset enhance_cleanup --deinterlace off
+aivideoenhancer enhance ./clip.mp4 -o ./clips --upscale x2 --denoise light --clip 0:42
+aivideoenhancer extract-frames video.mp4 -o ./frames --preset thumbnails
+aivideoenhancer extract-frames video.mp4 -o ./frames_up --timestamps 2,5,10 --upscale x2
 aivideoenhancer remix suggest video.mp4 --duration 10
-aivideoenhancer remix render video.mp4 --clips "1-4,8-11,14-17" -o .\reel.mp4 --aspect 9:16 --music music.mp3 --duck
+aivideoenhancer remix render video.mp4 --clips "1-4,8-11,14-17" -o ./reel.mp4 --aspect 9:16 --music music.mp3 --duck
 ```
 
 ## Exit codes
