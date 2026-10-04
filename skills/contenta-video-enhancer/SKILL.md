@@ -6,9 +6,9 @@ allowed-tools: Bash(aivideoenhancer:*)
 
 # AI Video Enhancer Studio
 
-Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.16+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`).
+Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.17+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`).
 
-Results are human-readable text on stdout; log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`). Only `remix suggest` has `--json`. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
+Results are human-readable text on stdout; log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`), and every failure prints one `Error: ...` line on stderr before the non-zero exit, so keep stderr when a command fails. When stdout is not a terminal, progress is one line per phase (`enhance --quiet` silences it). Numbers use a `.` decimal point whatever the machine locale. Only `remix suggest` has `--json`. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
 
 ## First steps
 
@@ -65,7 +65,7 @@ aivideoenhancer remix render <file> --clips "1-4,8-11" -o <reel.mp4> [--aspect o
 
 `remix suggest` prints a ready-to-run `remix render` command. `remix render` writes one H.264 MP4.
 
-## Examples (verified on 2026.7.16)
+## Examples (verified on 2026.7.17)
 
 ```bash
 aivideoenhancer enhance ./clip.mp4 -o ./enhanced --upscale x2 --denoise light --codec h265 --crf 18
@@ -86,6 +86,7 @@ aivideoenhancer remix render video.mp4 --clips "1-4,8-11,14-17" -o ./reel.mp4 --
 ## Guidelines
 
 - Check `status` before offering upscaling (over MCP: `get_status`, field `upscale.available`); without an NVIDIA RTX GPU, offer denoise, stabilize, sharpen and interpolation instead.
+- MCP `enhance_video` also takes `clip` (start in seconds or m:ss; the free 10-second clean clip, same rules as `--clip`), `compare` (bool), `compare_labels` ("Before|After") and `compare_layout` (`horizontal|vertical`); the result lists `clipPath` and `comparePaths`. On the trial the result carries `trialWatermarked` and a `trialNotice`.
 - x4 upscaling of long videos takes a long time; say so before starting, and try a short clip first.
 - Interlaced sources (old DVD/camcorder footage; the MCP `analyze_video` tool reports `isInterlaced`) are deinterlaced with `yadif` when you use a preset. Without a preset, add `--deinterlace yadif` or `bwdif` yourself.
 - Trial: no end date. This computer's first 5 full exports (lifetime, plus 10 after the newsletter confirmation in the app) are full resolution without a watermark, then output is watermarked and capped at 1280x720. A remix render and an upscaled frame extraction each use one free file. `--clip` gives free clean 10-second clips. Nothing stops working; `aivideoenhancer register <email> <key>` removes the limits.
