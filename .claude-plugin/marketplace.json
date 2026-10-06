@@ -10,7 +10,7 @@
       "name": "contentasoft-ai-video-enhancer",
       "source": "./",
       "description": "AI Video Enhancer Studio on your Windows PC from your AI agent: upscaling, stabilizing, denoising and frame-rate conversion of videos on an NVIDIA RTX GPU. Runs locally on your files.",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "tags": [
         "windows",
         "batch",

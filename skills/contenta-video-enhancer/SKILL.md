@@ -6,7 +6,7 @@ allowed-tools: Bash(aivideoenhancer:*)
 
 # AI Video Enhancer Studio
 
-Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.17+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`).
+Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.19+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`).
 
 Results are human-readable text on stdout; log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`), and every failure prints one `Error: ...` line on stderr before the non-zero exit, so keep stderr when a command fails. When stdout is not a terminal, progress is one line per phase (`enhance --quiet` silences it). Numbers use a `.` decimal point whatever the machine locale. Only `remix suggest` has `--json`. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
 
@@ -18,7 +18,7 @@ aivideoenhancer analyze <file>  # resolution, fps, duration, codec
 aivideoenhancer presets
 ```
 
-VSR upscaling needs an NVIDIA RTX GPU (no CPU fallback); `status` prints `AI upscale: NO` on a machine without one, and every upscale job would fail there. Interpolation needs a Vulkan GPU. Stabilize, rolling shutter, denoise, deinterlace and sharpen need no GPU.
+VSR upscaling needs an NVIDIA RTX GPU (no CPU fallback); `status` prints `AI upscale: NO` on a machine without one, and every upscale job would fail there. Interpolation needs a Vulkan GPU; `Vulkan: Yes` in `status` means the Vulkan runtime is installed, which is necessary but does not prove the device can run it. Stabilize, rolling shutter, denoise, deinterlace and sharpen need no GPU.
 
 ## enhance
 
@@ -65,7 +65,7 @@ aivideoenhancer remix render <file> --clips "1-4,8-11" -o <reel.mp4> [--aspect o
 
 `remix suggest` prints a ready-to-run `remix render` command. `remix render` writes one H.264 MP4.
 
-## Examples (verified on 2026.7.17)
+## Examples (verified on 2026.7.19)
 
 ```bash
 aivideoenhancer enhance ./clip.mp4 -o ./enhanced --upscale x2 --denoise light --codec h265 --crf 18
@@ -81,7 +81,7 @@ aivideoenhancer remix render video.mp4 --clips "1-4,8-11,14-17" -o ./reel.mp4 --
 
 ## Exit codes
 
-0 success · 1 general error (also `analyze` on a file that is not a video) · 2 invalid arguments (including a bad enumerated value, a `--crf` outside 1-51 and a bad `--clip`) · 3 daily `--clip` limit reached for this video · 4 enhancement failed · 5 file not found (also a folder with no videos) · 6 tools missing.
+0 success · 1 general error (also `analyze` on a file that is not a video) · 2 invalid arguments (including a bad enumerated value, a `--crf` outside 1-51 and a bad `--clip`) · 3 daily `--clip` limit reached for this video · 4 enhancement failed (also a job that stalls: it stops with `Timed out: ...`, writes no output and can be run again) · 5 file not found (also a folder with no videos) · 6 tools missing.
 
 ## Guidelines
 
