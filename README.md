@@ -46,7 +46,7 @@ Client-by-client instructions: https://www.npmjs.com/package/@contentasoft/ai-vi
 
 ## What is included
 
-- **MCP server** `ai-video-enhancer` with the tools `enhance_video`, `get_file_info`, `get_status`, `list_presets`, `list_formats`, `get_license_status`, `analyze_video`. Each tool
+- **MCP server** `ai-video-enhancer` with the tools `enhance_video`, `get_file_info`, `get_status`, `list_presets`, `list_formats`, `get_license_status`. Each tool
   says whether it only reads files, writes new files, may overwrite files, or uses the internet.
 - **Skill** `contenta-video-enhancer`: how and when the agent should use those tools and the `aivideoenhancer` command line.
 
