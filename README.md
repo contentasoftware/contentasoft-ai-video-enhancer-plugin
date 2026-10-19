@@ -46,7 +46,7 @@ Client-by-client instructions: https://www.npmjs.com/package/@contentasoft/ai-vi
 
 ## What is included
 
-- **MCP server** `ai-video-enhancer` with the tools `enhance_video`, `analyze_video`, `get_status`, `list_presets`. Each tool
+- **MCP server** `ai-video-enhancer` with the tools `enhance_video`, `get_file_info`, `get_status`, `list_presets`, `list_formats`, `get_license_status`, `analyze_video`. Each tool
   says whether it only reads files, writes new files, may overwrite files, or uses the internet.
 - **Skill** `contenta-video-enhancer`: how and when the agent should use those tools and the `aivideoenhancer` command line.
 
@@ -57,11 +57,18 @@ Client-by-client instructions: https://www.npmjs.com/package/@contentasoft/ai-vi
   A nightly run with `--skip-existing` enhances only the videos that have no output yet:
 
   ```
-  schtasks /create /tn "AI Video Enhancer Studio nightly" /sc daily /st 02:00 /tr "aivideoenhancer enhance D:\Tapes -o D:\Restored --preset old_video_restoration --skip-existing"
+  schtasks /create /tn "AI Video Enhancer Studio nightly" /sc daily /st 02:00 /tr "aivideoenhancer batch D:\Tapes -o D:\Restored --preset old_video_restoration --skip-existing"
   ```
-- Results are plain text on stdout and log lines go to stderr; a failure prints one `Error: ...` line on stderr. Only `remix suggest` has `--json`, so check the exit code.
-- Exit codes: 0 done · 1 general error · 2 invalid arguments · 3 daily clip limit reached · 4 enhancement failed or timed out · 5 file not found · 6 tools missing.
-- The full command reference is the skill: `skills/contenta-video-enhancer/SKILL.md`.
+- Every command takes `--json` and prints one JSON object on stdout (logs go to stderr): `success`, `exitCode`, `error`, `warnings`, `errors` and `outputs`, plus the trial fields when they apply. Add `--progress` for one `{"type":"progress",...}` line per finished file before that object.
+- Exit codes: 0 done · 1 unexpected error · 2 invalid arguments · 3 input not found or unreadable · 4 some items failed (the others are written) · 5 nothing succeeded · 6 the licence or trial refused the run · 130 cancelled. The four ContentaSoft command lines share this table.
+- The skill (`skills/contenta-video-enhancer/SKILL.md`) tells the agent which commands to use.
+
+## Full CLI and MCP reference
+
+Every `aivideoenhancer` command, option and exit code, the JSON output and every MCP tool with its parameters:
+
+- Command line: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/cli.md
+- MCP server: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/mcp-server.md
 
 ## Privacy
 
