@@ -1,7 +1,7 @@
 ---
 name: contenta-video-enhancer
 description: Enhance videos with the AI Video Enhancer Studio CLI (aivideoenhancer) - NVIDIA Video Super Resolution upscaling, RIFE frame interpolation to 30/60 fps, stabilization, rolling-shutter correction, denoise, deinterlace, sharpen, before/after comparison videos, still-frame extraction and highlight-reel remixes. Use when the user asks to upscale or restore a video, fix shaky or noisy footage, raise the frame rate, grab stills or thumbnails from a video, or cut a highlight reel.
-allowed-tools: Bash(aivideoenhancer:*)
+allowed-tools: Bash(aivideoenhancer *) PowerShell(aivideoenhancer *) Bash(aivideoenhancer.exe *) PowerShell(aivideoenhancer.exe *)
 ---
 
 # AI Video Enhancer Studio
@@ -9,6 +9,13 @@ allowed-tools: Bash(aivideoenhancer:*)
 Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.21+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`). Full reference: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/cli.md
 
 Every command accepts `--json` (one JSON object on stdout), `--plain`, `--quiet`, `-v/--verbose` and `--progress`. Log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`); without `--json` every failure prints one `Error: ...` line on stderr before the non-zero exit, so keep stderr when a command fails. Numbers use a `.` decimal point whatever the machine locale. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
+
+## Running commands
+
+- **MCP first:** when this app's MCP tools are connected (`enhance_video`, `get_file_info`, `get_status` ...), use them for what they cover and the command line for the rest. They take paths and options as named fields, so there is no quoting or wildcard to get wrong. Give them full paths.
+- **One command per call:** run one `aivideoenhancer` command at a time, with no `cd`, `&&`, `;`, pipes, loops, variables or `$(...)`. Anything else on the line can stop the run to ask the user for approval, and the CLI already handles folders and reports its results (below).
+- **Let the CLI do the folder work:** `aivideoenhancer batch <folder>` enhances every video in it (`--include "*.mp4"` picks the files, `--skip-existing` makes a re-run do only what is missing), and `-o` creates missing folders.
+- **Read the results, don't measure them:** every `--json` result lists the written files in `outputs`, and a `batch` summary has one `files` row per video. For an output's size, resolution, frame rate and duration, run `aivideoenhancer info <output> --json`. No `stat` or `Get-Item` wrapper is needed. To see what is in a folder, use the agent's own file tools.
 
 ## First steps
 
