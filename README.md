@@ -88,9 +88,9 @@ Every `aivideoenhancer` command, option and exit code, the JSON output and every
   bytes as the npm package `@contentasoft/ai-video-enhancer-mcp`, MIT, no dependencies; source: https://github.com/contentasoftware/mcp-launcher)
   or, without Node.js, the Windows PowerShell stub `server/stub.ps1` serves one tool, `get_started`. Neither sends
   anything over the network.
-- While Claude Code uses the skill, it can run the app's own command-line tool in Bash or PowerShell without asking
-  (`allowed-tools: Bash(aivideoenhancer *) PowerShell(aivideoenhancer *) Bash(aivideoenhancer.exe *) PowerShell(aivideoenhancer.exe *)`). That permission ends when you send your next message. Other commands, and the
-  plugin's MCP tools, follow your own Claude Code permission settings.
+- While Claude Code uses the skill, it can use the plugin's MCP tools and run the app's own command-line tool in Bash or
+  PowerShell without asking (`allowed-tools: Bash(aivideoenhancer *) PowerShell(aivideoenhancer *) Bash(aivideoenhancer.exe *) PowerShell(aivideoenhancer.exe *) mcp__plugin_contentasoft-ai-video-enhancer_ai-video-enhancer`). That permission ends when you send your next message.
+  Other commands follow your own Claude Code permission settings.
 
 ## License
 
