@@ -6,7 +6,7 @@ allowed-tools: Bash(aivideoenhancer *) PowerShell(aivideoenhancer *) Bash(aivide
 
 # AI Video Enhancer Studio
 
-Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.21+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`). Full reference: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/cli.md
+Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.22+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`). Full reference: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/cli.md
 
 Every command accepts `--json` (one JSON object on stdout), `--plain`, `--quiet`, `-v/--verbose` and `--progress`. Log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`); without `--json` every failure prints one `Error: ...` line on stderr before the non-zero exit, so keep stderr when a command fails. Numbers use a `.` decimal point whatever the machine locale. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
 
