@@ -6,7 +6,7 @@ allowed-tools: Bash(aivideoenhancer *) PowerShell(aivideoenhancer *) Bash(aivide
 
 # AI Video Enhancer Studio
 
-Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.22+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`). Full reference: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/cli.md
+Use the `aivideoenhancer` CLI (AI Video Enhancer Studio 2026.7.24+, Windows). Default per-user install: `%LOCALAPPDATA%\Programs\AIVideoEnhancerStudio\aivideoenhancer.exe`, on the user PATH. Check with `aivideoenhancer --version` (it prints the build id after a `+`). Full reference: https://github.com/brunojanvier77/ContentaSoft/blob/main/ai-video-enhancer/cli.md
 
 Every command accepts `--json` (one JSON object on stdout), `--plain`, `--quiet`, `-v/--verbose` and `--progress`. Log lines go to stderr (drop them with `2>/dev/null`; in PowerShell `2>$null`); without `--json` every failure prints one `Error: ...` line on stderr before the non-zero exit, so keep stderr when a command fails. Numbers use a `.` decimal point whatever the machine locale. Relative and full paths both work. `aivideoenhancer register <email> <key>` registers a license key.
 
@@ -70,11 +70,14 @@ Frames always go into `<dir>\<name>_frames\` (one subfolder per video).
 ## remix
 
 ```bash
-aivideoenhancer remix suggest <file> [--duration 30] [--clips N] [--min-clip 3] [--max-clip 6] [--threshold 10] [--audio-weight 0.4] [--json]
-aivideoenhancer remix render <file> --clips "1-4,8-11" -o <reel.mp4> [--aspect original|9:16|1:1|16:9] [--music <file>] [--music-volume 30] [--duck] [--mute] [--max-duration 30]
+aivideoenhancer remix suggest <file>... [--folder <dir>] [--duration 30] [--clips N] [--share duration|equal|score] [--order recorded|listed|best] [--min-clip 3] [--max-clip 6] [--threshold 10] [--audio-weight 0.4] [--json]
+aivideoenhancer remix render <file>... --clips "1-4,8-11" -o <reel.mp4> [--aspect original|9:16|1:1|16:9] [--music <file>] [--music-volume 30] [--duck] [--mute] [--max-duration 30]
 ```
 
-`remix suggest` prints a ready-to-run `remix render` command. `remix render` writes one H.264 MP4.
+Several files (or `--folder <dir>`) make one reel from the best moments across all of them; sources
+of different size, frame rate or audio are normalised to one profile. With several inputs each
+`--clips` range carries the input index: `--clips "0:12-16,1:40-44.5"`. `remix suggest` prints a
+ready-to-run `remix render` command. `remix render` writes one H.264 MP4.
 
 ## Examples
 
