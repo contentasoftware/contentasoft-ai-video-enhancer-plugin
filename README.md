@@ -1,5 +1,8 @@
 # AI Video Enhancer Studio plugin
 
+**Windows 10/11 only.** There is no Mac or Linux version: on a Mac or Linux machine the plugin installs, but its
+server cannot start.
+
 Use **AI Video Enhancer Studio** from your AI agent on your Windows PC: upscaling, stabilizing, denoising and frame-rate conversion of videos on an NVIDIA RTX GPU. You ask in plain words and the
 agent does the work on files on your computer. It works with any agent that runs local MCP servers: Cursor,
 Claude Code, Codex, VS Code, Windsurf and others.
@@ -16,6 +19,8 @@ AI Video Enhancer Studio also works without an agent: open it from the Start men
 
 - $129, a one-time purchase. No subscription needed. Prices: https://www.contenta-software.com/aivideoenhancer/buy.php
 - The free trial has no end date: the first 5 full exports per PC are clean and full resolution, later ones are watermarked and capped at 1280x720; 10-second clips (`--clip`) stay free. `aivideoenhancer status` shows how many full exports are left. Nothing stops working; a licence removes the limits.
+- After buying, the licence key arrives by email. Enter it in AI Video Enhancer Studio's Register page, or run
+  `aivideoenhancer register <email> <key>` in a terminal. The key does not need to go through the chat.
 
 ## Install
 

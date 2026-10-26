@@ -1,6 +1,6 @@
 ---
 name: contenta-video-enhancer
-description: Enhance videos with the AI Video Enhancer Studio CLI (aivideoenhancer) - NVIDIA Video Super Resolution upscaling, RIFE frame interpolation to 30/60 fps, stabilization, rolling-shutter correction, denoise, deinterlace, sharpen, before/after comparison videos, still-frame extraction and highlight-reel remixes. Use when the user asks to upscale or restore a video, fix shaky or noisy footage, raise the frame rate, grab stills or thumbnails from a video, or cut a highlight reel.
+description: Enhance videos with the AI Video Enhancer Studio CLI (aivideoenhancer) - NVIDIA Video Super Resolution upscaling, RIFE frame interpolation to 30/60 fps, stabilization, rolling-shutter correction, denoise, deinterlace, sharpen, before/after comparison videos, still-frame extraction and highlight-reel remixes. Use when the user asks to upscale or restore a video, fix shaky or noisy footage, raise the frame rate, grab stills or thumbnails from a video, or cut a highlight reel. Windows 10/11 only (no Mac or Linux version).
 allowed-tools: Bash(aivideoenhancer *) PowerShell(aivideoenhancer *) Bash(aivideoenhancer.exe *) PowerShell(aivideoenhancer.exe *) mcp__plugin_contentasoft-ai-video-enhancer_ai-video-enhancer
 ---
 
